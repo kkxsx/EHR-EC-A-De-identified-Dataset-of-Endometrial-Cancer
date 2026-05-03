@@ -1,0 +1,76 @@
+{
+  "d_items": {
+    "columns": ["itemid", "label", "abbreviation", "category"],
+    "primary_key": ["itemid"]
+  },
+  "admissions": {
+    "columns": ["subject_id", "hadm_id", "admittime", "dischtime", "admission_type", "discharge_dept", "in_state", "in_days", "pre_op_days", "in_diag_code", "resi_case_no", "in_diag"],
+    "primary_key": ["hadm_id"],
+    "foreign_keys": {
+      "subject_id": {"table": "patients", "column": "subject_id"}
+    }
+  },
+  "patients": {
+    "columns": ["subject_id", "gender", "anchor_age", "anchor_year", "sick_name", "birth_date", "id_number", "contact_address", "contact_number", "contacts", "country_of_residence", "ethnic_group", "occupation", "other_patient_ids", "other_patient_names", "religious", "region_residence"],
+    "primary_key": ["subject_id"]
+  },
+  "chartevents": {
+    "columns": ["subject_id", "hadm_id", "charttime", "itemid", "value"],
+    "primary_key": ["subject_id", "hadm_id", "charttime", "itemid"],
+    "foreign_keys": {
+      "subject_id": {"table": "patients", "column": "subject_id"},
+      "hadm_id": {"table": "admissions", "column": "hadm_id"},
+      "itemid": {"table": "d_items", "column": "itemid"}
+    }
+  },
+  "labevents": {
+    "columns": ["labevent_id", "subject_id", "hadm_id", "itemid", "charttime", "storetime", "value", "valueuom", "reference_value", "flag", "experimental_method", "inspect_combination_name", "inspect_apply_doctor", "inspect_register_time", "cure_dept"],
+    "primary_key": ["labevent_id"],
+    "foreign_keys": {
+      "subject_id": {"table": "patients", "column": "subject_id"},
+      "hadm_id": {"table": "admissions", "column": "hadm_id"},
+      "itemid": {"table": "d_items", "column": "itemid"}
+    }
+  },
+  "omr": {
+    "columns": ["subject_id", "hadm_id", "result_name", "result_value"],
+    "primary_key": ["subject_id", "hadm_id", "result_name"],
+    "foreign_keys": {
+      "subject_id": {"table": "patients", "column": "subject_id"},
+      "hadm_id": {"table": "admissions", "column": "hadm_id"}
+    }
+  },
+  "procedureevents": {
+    "columns": ["subject_id", "hadm_id", "itemid", "location", "operat_code", "operat_diagnosis", "operat_date", "anesthesia_type", "pre_post_diag_consistency", "clin_path_consistency", "doctor"],
+    "primary_key": ["subject_id", "hadm_id", "operat_date", "itemid"],
+    "foreign_keys": {
+      "subject_id": {"table": "patients", "column": "subject_id"},
+      "hadm_id": {"table": "admissions", "column": "hadm_id"},
+      "itemid": {"table": "d_items", "column": "itemid"}
+    }
+  },
+  "diagnoses_EC": {
+    "columns": ["subject_id", "hadm_id", "seq_num", "diagnosis_name", "state", "diagnosis_code"],
+    "primary_key": ["subject_id", "hadm_id", "seq_num"],
+    "foreign_keys": {
+      "subject_id": {"table": "patients", "column": "subject_id"},
+      "hadm_id": {"table": "admissions", "column": "hadm_id"}
+    }
+  },
+  "doctor_note": {
+    "columns": ["subject_id", "hadm_id", "visit_type", "diagnosis_sequence", "diagnosis_class", "diagnosis_prop", "diagnosis_code", "diagnosis_name", "diagnosis_date", "treat_days", "treat_result", "diag_doctor", "operation_date", "lapse_to", "curr_service", "sick_synptom", "sick_deal", "operator", "main_describe", "now_ill_record", "past_ill_record", "epidemic_report_date", "epidemic_report_code", "epidemic_report_name", "illness_happen_time", "edit_time", "sensitive_code", "allergies", "pathology", "first_flag", "disease_date", "ferver_code", "diarrhea_code", "vct_flag", "fever_flag", "receipt_flag", "sick_trace", "report_seq", "liver_disease", "if_born", "if_breast_feed", "if_dialysis", "if_implant", "nephropathy", "evaluation_memo", "instead_flag", "sfzj_flag", "sensitive_record", "produce_date_chartdate", "production_category"],
+    "primary_key": ["subject_id", "hadm_id", "diagnosis_date", "diagnosis_sequence"],
+    "foreign_keys": {
+      "subject_id": {"table": "patients", "column": "subject_id"},
+      "hadm_id": {"table": "admissions", "column": "hadm_id"}
+    }
+  },
+  "images": {
+    "columns": ["subject_id", "hadm_id", "bill_no", "pacs_bill_no", "source_system_code", "his_bill_no", "visit_dept", "bed_no", "diagnose_code", "diagnose_name", "diagnose_desc", "prescribe_no", "seq_num", "exam_method", "location", "exam_part_desc", "exam_clinic_code", "exam_clinic_name", "exam_custom_no", "visit_state_desc", "spec_type_desc", "exam_purpose", "abnormal_flag", "report_title", "report_status", "exam_device", "exam_device_name", "apply_time", "apply_dept", "apply_operator", "valid_flag", "getister_time", "register_operator", "starttime", "exam_dept", "exam_operator", "report_time", "report_operator", "audit_time", "audit_operator", "modify_time", "print_time", "print_operator", "subsequent_visit_operator", "slice_operator", "create_time", "remark", "special_exam_desc", "study_instance_uid", "cancer_progression", "file_path"],
+    "primary_key": ["subject_id", "hadm_id", "bill_no"],
+    "foreign_keys": {
+      "subject_id": {"table": "patients", "column": "subject_id"},
+      "hadm_id": {"table": "admissions", "column": "hadm_id"}
+    }
+  }
+}

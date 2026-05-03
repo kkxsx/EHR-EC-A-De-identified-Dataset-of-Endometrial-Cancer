@@ -1,0 +1,2216 @@
+{
+  "source_tables": {
+    "病案首页": {
+      "file_pattern": "*病案首页*.xlsx",
+      "field_mappings": {
+        "SICK_ID": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "patients",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "procedureevents",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "subject_id"
+            }
+          ]
+        },
+        "RESIDENCE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "procedureevents",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "hadm_id"
+            }
+          ]
+        },
+        "SICK_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "sick_name"
+            }
+          ]
+        },
+        "ITEM_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "procedureevents",
+              "target_field": "itemid",
+              "special_handling": "需要确定对应到MIMIC-IV的具体代码"
+            },
+            {
+              "target_table": "d_items",
+              "target_field": "itemid",
+              "special_handling": "需要确定对应到MIMIC-IV的具体代码"
+            }
+          ]
+        },
+        "ITEM_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "d_items",
+              "target_field": "label"
+            }
+          ]
+        },
+        "DIAGNOSIS_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "diagnosis_name",
+              "special_handling": "补充seq_num = 病案首页-0"
+            }
+          ]
+        },
+        "VISIT_TYPE": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "admission_type",
+              "special_handling": "需要映射：1=门诊，2=住院"
+            }
+          ]
+        }
+      }
+    },
+    "门诊检验信息": {
+      "file_pattern": "*门诊诊刮患者的检验信息*.csv",
+      "field_mappings": {
+        "SICK_ID": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "labevents",
+              "target_field": "subject_id",
+              "special_handling": "生成labevent_id, 暂定为提取时间 + 6位数随机"
+            },
+            {
+              "target_table": "procedureevents",
+              "target_field": "subject_id"
+            }
+          ]
+        },
+        "RESIDENCE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "labevents",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "procedureevents",
+              "target_field": "hadm_id"
+            }
+          ]
+        },
+        "SICK_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "sick_name"
+            }
+          ]
+        },
+        "ITEM_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "procedureevents",
+              "target_field": "itemid",
+              "special_handling": "需要确定对应到MIMIC-IV的具体代码"
+            },
+            {
+              "target_table": "d_items",
+              "target_field": "itemid",
+              "special_handling": "0"
+            }
+          ]
+        },
+        "ITEM_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "d_items",
+              "target_field": "label",
+              "special_handling": "0"
+            }
+          ]
+        },
+        "INSPECT_OPERATION_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "charttime"
+            }
+          ]
+        },
+        "DIAGNOSIS_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "diagnosis_name",
+              "special_handling": "补充seq_num = 门诊-0"
+            }
+          ]
+        },
+        "INSPECT_REGISTER_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "inspect_register_time"
+            }
+          ]
+        },
+        "CURE_DEPT": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "cure_dept"
+            }
+          ]
+        },
+        "INSPECT_COMBINATION_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "inspect_combination_name"
+            }
+          ]
+        },
+        "INSPECT_APPLY_DOCTOR": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "inspect_apply_doctor"
+            }
+          ]
+        },
+        "INSPECT_ITEM_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "d_items",
+              "target_field": "label",
+              "special_handling": "1"
+            }
+          ]
+        },
+        "INSPECT_ITEM_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "itemid"
+            },
+            {
+              "target_table": "d_items",
+              "target_field": "itemid",
+              "special_handling": "1"
+            }
+          ]
+        },
+        "INSPECT_ITEM_RESULT": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "value"
+            }
+          ]
+        },
+        "EXCEPTION_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "flag"
+            }
+          ]
+        },
+        "UNIT": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "valueuom"
+            }
+          ]
+        },
+        "REFERENCE_VALUE": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "reference_value"
+            }
+          ]
+        },
+        "EXPERIMENTAL_METHOD": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "experimental_method"
+            }
+          ]
+        },
+        "INSPECT_REPORT_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "storetime"
+            }
+          ]
+        }
+      }
+    },
+    "住院检验信息": {
+      "file_pattern": "*住院诊刮患者的检验信息*.csv",
+      "field_mappings": {
+        "SICK_ID": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "patients",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "labevents",
+              "target_field": "subject_id",
+              "special_handling": "生成labevent_id, 暂定为提取时间 + 6位数随机"
+            },
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "procedureevents",
+              "target_field": "subject_id"
+            }
+          ]
+        },
+        "RESIDENCE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "labevents",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "procedureevents",
+              "target_field": "hadm_id"
+            }
+          ]
+        },
+        "SICK_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "sick_name"
+            }
+          ]
+        },
+        "ITEM_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "procedureevents",
+              "target_field": "itemid",
+              "special_handling": "需要确定对应到MIMIC-IV的具体代码"
+            },
+            {
+              "target_table": "d_items",
+              "target_field": "itemid",
+              "special_handling": "0"
+            }
+          ]
+        },
+        "ITEM_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "d_items",
+              "target_field": "label",
+              "special_handling": "0"
+            }
+          ]
+        },
+        "DIAGNOSIS_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "diagnosis_name",
+              "special_handling": "补充seq_num = 住院-0"
+            }
+          ]
+        },
+        "INSPECT_APPLY_DOCTOR": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "inspect_apply_doctor"
+            }
+          ]
+        },
+        "ADMISSION_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "admittime"
+            },
+            {
+              "target_table": "patients",
+              "target_field": "anchor_year",
+              "special_handling": "提取年份"
+            }
+          ]
+        },
+        "DISCHARGE_DEPT": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "discharge_dept"
+            }
+          ]
+        },
+        "DISCHARGE_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "dischtime"
+            }
+          ]
+        },
+        "INSPECT_COMBINATION_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "inspect_combination_name"
+            }
+          ]
+        },
+        "INSPECT_REPORT_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "storetime"
+            }
+          ]
+        },
+        "INSPECT_ITEM_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "d_items",
+              "target_field": "label",
+              "special_handling": "1"
+            }
+          ]
+        },
+        "INSPECT_ITEM_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "itemid"
+            },
+            {
+              "target_table": "d_items",
+              "target_field": "itemid",
+              "special_handling": "1"
+            }
+          ]
+        },
+        "INSPECT_ITEM_RESULT": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "value"
+            }
+          ]
+        },
+        "EXCEPTION_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "flag"
+            }
+          ]
+        },
+        "UNIT": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "valueuom"
+            }
+          ]
+        },
+        "REFERENCE_VALUE": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "reference_value"
+            }
+          ]
+        },
+        "INSPECT_OPERATION_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "charttime"
+            }
+          ]
+        },
+        "EXPERIMENTAL_METHOD": {
+          "target_mappings": [
+            {
+              "target_table": "labevents",
+              "target_field": "experimental_method"
+            }
+          ]
+        }
+      }
+    },
+    "妇科出院": {
+      "file_pattern": "*妇科出院*.xlsx",
+      "field_mappings": {
+        "SICK_ID": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "patients",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "procedureevents",
+              "target_field": "subject_id"
+            }
+          ]
+        },
+        "RESIDENCE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "procedureevents",
+              "target_field": "hadm_id"
+            }
+          ]
+        },
+        "SICK_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "sick_name"
+            }
+          ]
+        },
+        "GENDER": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "gender"
+            }
+          ]
+        },
+        "PATIENT_AGE": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "anchor_age"
+            }
+          ]
+        },
+        "BIRTH_DATE": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "birth_date"
+            }
+          ]
+        },
+        "ID_NUMBER": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "id_number"
+            }
+          ]
+        },
+        "CONTACT_ADDRESS": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "contact_address"
+            }
+          ]
+        },
+        "CONTACT_NUMBER": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "contact_number"
+            }
+          ]
+        },
+        "CONTACTS": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "contacts"
+            }
+          ]
+        },
+        "IN_STATE": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "in_state"
+            },
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "state"
+            }
+          ]
+        },
+        "ADMISSION_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "admittime"
+            },
+            {
+              "target_table": "patients",
+              "target_field": "anchor_year",
+              "special_handling": "提取年份"
+            }
+          ]
+        },
+        "DISCHARGE_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "dischtime"
+            }
+          ]
+        },
+        "IN_DAYS": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "in_days"
+            }
+          ]
+        },
+        "PRE_OP_DAYS": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "pre_op_days"
+            }
+          ]
+        },
+        "DISCHARGE_DEPT_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "discharge_dept"
+            }
+          ]
+        },
+        "IN_DIAG_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "diagnosis_code"
+            },
+            {
+              "target_table": "admissions",
+              "target_field": "in_diag_code"
+            }
+          ]
+        },
+        "IN_DIAG": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "in_diag"
+            }
+          ]
+        },
+        "MAIN_DIAGNOSIS_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "diagnosis_code"
+            }
+          ]
+        },
+        "MAIN_DIAGNOSIS": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "diagnosis_name"
+            }
+          ]
+        },
+        "FIRST_STATE": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "state"
+            }
+          ]
+        },
+        "SECOND_DIAGNOSIS_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "diagnosis_code"
+            }
+          ]
+        },
+        "SECOND_DIAGNOSIS": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "diagnosis_name"
+            }
+          ]
+        },
+        "SECOND_STATE": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "state"
+            }
+          ]
+        },
+        "THIRD_DIAGNOSIS_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "diagnosis_code"
+            }
+          ]
+        },
+        "THIRD_DIAGNOSIS": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "diagnosis_name"
+            }
+          ]
+        },
+        "THIRD_STATE": {
+          "target_mappings": [
+            {
+              "target_table": "diagnoses_EC",
+              "target_field": "state"
+            }
+          ]
+        },
+        "OPERAT_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "procedureevents",
+              "target_field": "operat_code"
+            }
+          ]
+        },
+        "OPERAT_DIAGNOSIS": {
+          "target_mappings": [
+            {
+              "target_table": "procedureevents",
+              "target_field": "operat_diagnosis"
+            }
+          ]
+        },
+        "OPERAT_DATE": {
+          "target_mappings": [
+            {
+              "target_table": "procedureevents",
+              "target_field": "operat_date"
+            }
+          ]
+        },
+        "ANESTHESIA_TYPE": {
+          "target_mappings": [
+            {
+              "target_table": "procedureevents",
+              "target_field": "anesthesia_type"
+            }
+          ]
+        },
+        "PRE_POST_DIAG_CONSISTENCY": {
+          "target_mappings": [
+            {
+              "target_table": "procedureevents",
+              "target_field": "pre_post_diag_consistency"
+            }
+          ]
+        },
+        "CLIN_PATH_CONSISTENCY": {
+          "target_mappings": [
+            {
+              "target_table": "procedureevents",
+              "target_field": "clin_path_consistency"
+            }
+          ]
+        },
+        "DOCTOR": {
+          "target_mappings": [
+            {
+              "target_table": "procedureevents",
+              "target_field": "doctor"
+            }
+          ]
+        }
+      }
+    },
+    "病理报告": {
+      "file_pattern": "*病理报告*.xlsx",
+      "field_mappings": {
+        "BILL_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "bill_no"
+            }
+          ]
+        },
+        "PACS_BILL_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "pacs_bill_no"
+            }
+          ]
+        },
+        "SOURCE_SYSTEM_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "source_system_code"
+            }
+          ]
+        },
+        "SICK_ID": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "images",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "admissions",
+              "target_field": "subject_id"
+            }
+          ]
+        },
+        "PATIENT_AGE": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "anchor_age"
+            }
+          ]
+        },
+        "RESIDENCE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "admissions",
+              "target_field": "hadm_id"
+            }
+          ]
+        },
+        "RESI_CASE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "resi_case_no"
+            }
+          ]
+        },
+        "VISIT_TYPE": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "admission_type",
+              "special_handling": "需要映射：1=门诊，2=住院"
+            }
+          ]
+        },
+        "VISIT_DEPT": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "visit_dept"
+            }
+          ]
+        },
+        "BED_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "bed_no"
+            }
+          ]
+        },
+        "DIAGNOSE_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "diagnose_code"
+            }
+          ]
+        },
+        "DIAGNOSE_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "diagnose_name"
+            }
+          ]
+        },
+        "DIAGNOSE_DESC": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "diagnose_desc"
+            }
+          ]
+        },
+        "PRESCRIBE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "prescribe_no"
+            }
+          ]
+        },
+        "PRESCRIBE_PRIORITY": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "seq_num"
+            }
+          ]
+        },
+        "EXAM_METHOD": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_method"
+            }
+          ]
+        },
+        "EXAM_PART": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "location"
+            }
+          ]
+        },
+        "EXAM_PART_DESC": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_part_desc"
+            }
+          ]
+        },
+        "EXAM_CLINIC_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_clinic_code"
+            }
+          ]
+        },
+        "EXAM_CLINIC_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_clinic_name"
+            }
+          ]
+        },
+        "EXAM_CUSTOM_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_custom_no"
+            }
+          ]
+        },
+        "VISIT_STATE_DESC": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "visit_state_desc"
+            }
+          ]
+        },
+        "EXAM_IMG_DESC": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "spec_type_desc"
+            }
+          ]
+        },
+        "EXAM_PURPOSE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_purpose"
+            }
+          ]
+        },
+        "ABNORMAL_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "abnormal_flag"
+            }
+          ]
+        },
+        "REPORT_TITLE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "report_title"
+            }
+          ]
+        },
+        "REPORT_STATUS": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "report_status"
+            }
+          ]
+        },
+        "EXAM_DEVICE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_device"
+            }
+          ]
+        },
+        "EXAM_DEVICE_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_device_name"
+            }
+          ]
+        },
+        "APPLY_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "apply_time"
+            }
+          ]
+        },
+        "APPLY_DEPT": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "apply_dept"
+            }
+          ]
+        },
+        "APPLY_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "apply_operator"
+            }
+          ]
+        },
+        "VALID_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "valid_flag"
+            }
+          ]
+        },
+        "REGISTER_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "getister_time"
+            }
+          ]
+        },
+        "REGISTER_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "register_operator"
+            }
+          ]
+        },
+        "EXAM_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "starttime"
+            }
+          ]
+        },
+        "EXAM_DEPT": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_dept"
+            }
+          ]
+        },
+        "EXAM_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_operator"
+            }
+          ]
+        },
+        "REPORT_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "report_time"
+            }
+          ]
+        },
+        "REPORT_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "report_operator"
+            }
+          ]
+        },
+        "AUDIT_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "audit_time"
+            }
+          ]
+        },
+        "AUDIT_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "audit_operator"
+            }
+          ]
+        },
+        "MODIFY_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "modify_time"
+            }
+          ]
+        },
+        "PRINT_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "print_time"
+            }
+          ]
+        },
+        "PRINT_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "print_operator"
+            }
+          ]
+        },
+        "SUBSEQUENT_VISIT_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "subsequent_visit_operator"
+            }
+          ]
+        },
+        "SLICE_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "slice_operator"
+            }
+          ]
+        },
+        "CREATE_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "create_time"
+            }
+          ]
+        },
+        "REMARK": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "remark"
+            }
+          ]
+        },
+        "SPECIAL_EXAM_DESC": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "special_exam_desc"
+            }
+          ]
+        },
+        "STUDY_INSTANCE_UID": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "study_instance_uid"
+            }
+          ]
+        },
+        "CANCER_PROGRESSION": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "cancer_progression"
+            }
+          ]
+        }
+      }
+    },
+    "病理和B超报告": {
+      "file_pattern": "*病理和B超报告*.xlsx",
+      "field_mappings": {
+        "BILL_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "bill_no"
+            }
+          ]
+        },
+        "PACS_BILL_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "pacs_bill_no"
+            }
+          ]
+        },
+        "SOURCE_SYSTEM_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "source_system_code"
+            }
+          ]
+        },
+        "HIS_BILL_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "his_bill_no"
+            }
+          ]
+        },
+        "SICK_ID": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "images",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "admissions",
+              "target_field": "subject_id"
+            }
+          ]
+        },
+        "PATIENT_AGE": {
+          "target_mappings": [
+            {
+              "target_table": "patients",
+              "target_field": "anchor_age"
+            }
+          ]
+        },
+        "RESIDENCE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "admissions",
+              "target_field": "hadm_id"
+            }
+          ]
+        },
+        "RESI_CASE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "admissions",
+              "target_field": "resi_case_no"
+            }
+          ]
+        },
+        "VISIT_DEPT": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "visit_dept"
+            }
+          ]
+        },
+        "BED_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "bed_no"
+            }
+          ]
+        },
+        "DIAGNOSE_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "diagnose_code"
+            }
+          ]
+        },
+        "DIAGNOSE_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "diagnose_name"
+            }
+          ]
+        },
+        "DIAGNOSE_DESC": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "diagnose_desc"
+            }
+          ]
+        },
+        "PRESCRIBE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "prescribe_no"
+            }
+          ]
+        },
+        "PRESCRIBE_PRIORITY": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "seq_num"
+            }
+          ]
+        },
+        "EXAM_METHOD": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_method",
+              "special_handling": "可能包含多个检查方法，需要分割处理"
+            }
+          ]
+        },
+        "EXAM_PART": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "location"
+            }
+          ]
+        },
+        "EXAM_PART_DESC": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_part_desc",
+              "special_handling": "可能包含多个部位描述，需要分割处理"
+            }
+          ]
+        },
+        "EXAM_CLINIC_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_clinic_code",
+              "special_handling": "可能包含多个代码，需要分割处理"
+            }
+          ]
+        },
+        "EXAM_CLINIC_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_clinic_name",
+              "special_handling": "可能包含多个名称，需要分割处理"
+            }
+          ]
+        },
+        "EXAM_CUSTOM_NO": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_custom_no"
+            }
+          ]
+        },
+        "VISIT_STATE_DESC": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "visit_state_desc"
+            }
+          ]
+        },
+        "EXAM_IMG_DESC": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "spec_type_desc"
+            }
+          ]
+        },
+        "EXAM_PURPOSE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_purpose"
+            }
+          ]
+        },
+        "ABNORMAL_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "abnormal_flag"
+            }
+          ]
+        },
+        "REPORT_TITLE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "report_title",
+              "special_handling": "可能包含多个标题，需要分割处理"
+            }
+          ]
+        },
+        "REPORT_STATUS": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "report_status"
+            }
+          ]
+        },
+        "EXAM_DEVICE": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_device"
+            }
+          ]
+        },
+        "EXAM_DEVICE_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_device_name"
+            }
+          ]
+        },
+        "APPLY_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "apply_time"
+            }
+          ]
+        },
+        "APPLY_DEPT": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "apply_dept"
+            }
+          ]
+        },
+        "APPLY_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "apply_operator"
+            }
+          ]
+        },
+        "VALID_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "valid_flag"
+            }
+          ]
+        },
+        "REGISTER_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "getister_time"
+            }
+          ]
+        },
+        "REGISTER_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "register_operator"
+            }
+          ]
+        },
+        "EXAM_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "starttime"
+            }
+          ]
+        },
+        "EXAM_DEPT": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_dept"
+            }
+          ]
+        },
+        "EXAM_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "exam_operator"
+            }
+          ]
+        },
+        "REPORT_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "report_time"
+            }
+          ]
+        },
+        "REPORT_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "report_operator"
+            }
+          ]
+        },
+        "AUDIT_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "audit_time"
+            }
+          ]
+        },
+        "AUDIT_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "audit_operator"
+            }
+          ]
+        },
+        "MODIFY_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "modify_time"
+            }
+          ]
+        },
+        "PRINT_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "print_time"
+            }
+          ]
+        },
+        "PRINT_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "print_operator"
+            }
+          ]
+        },
+        "SUBSEQUENT_VISIT_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "subsequent_visit_operator"
+            }
+          ]
+        },
+        "SLICE_OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "slice_operator"
+            }
+          ]
+        },
+        "CREATE_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "create_time"
+            }
+          ]
+        },
+        "REMARK": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "remark"
+            }
+          ]
+        },
+        "SPECIAL_EXAM_DESC": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "special_exam_desc"
+            }
+          ]
+        },
+        "STUDY_INSTANCE_UID": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "study_instance_uid"
+            }
+          ]
+        },
+        "CANCER_PROGRESSION": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "cancer_progression"
+            }
+          ]
+        },
+        "File_Path": {
+          "target_mappings": [
+            {
+              "target_table": "images",
+              "target_field": "file_path"
+            }
+          ]
+        }
+      }
+    },
+    "病案诊断记录": {
+      "file_pattern": "*病案诊断记录*.xlsx",
+      "field_mappings": {
+        "SICK_ID": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "omr",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "chartevents",
+              "target_field": "subject_id"
+            },
+            {
+              "target_table": "patients",
+              "target_field": "subject_id"
+            }
+          ]
+        },
+        "RESIDENCE_NO": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "omr",
+              "target_field": "hadm_id"
+            },
+            {
+              "target_table": "chartevents",
+              "target_field": "hadm_id"
+            }
+          ]
+        },
+        "VISIT_TYPE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "visit_type",
+              "special_handling": "需要映射：1=门诊，2=住院"
+            }
+          ]
+        },
+        "DIAGNOSIS_SEQUENCE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "diagnosis_sequence"
+            }
+          ]
+        },
+        "DIAGNOSIS_CLASS": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "diagnosis_class"
+            }
+          ]
+        },
+        "DIAGNOSIS_PROP": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "diagnosis_prop"
+            }
+          ]
+        },
+        "DIAGNOSIS_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "diagnosis_code"
+            }
+          ]
+        },
+        "DIAGNOSIS_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "diagnosis_name"
+            }
+          ]
+        },
+        "DIAGNOSIS_DATE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "diagnosis_date"
+            }
+          ]
+        },
+        "TREAT_DAYS": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "treat_days"
+            }
+          ]
+        },
+        "TREAT_RESULT": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "treat_result"
+            }
+          ]
+        },
+        "DIAG_DOCTOR": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "diag_doctor"
+            }
+          ]
+        },
+        "OPERATION_DATE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "operation_date"
+            },
+            {
+              "target_table": "chartevents",
+              "target_field": "charttime"
+            }
+          ]
+        },
+        "LAPSE_TO": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "lapse_to"
+            }
+          ]
+        },
+        "SICK_SYNPTOM": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "sick_synptom"
+            }
+          ]
+        },
+        "SICK_DEAL": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "sick_deal"
+            }
+          ]
+        },
+        "DEPT_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "curr_service"
+            }
+          ]
+        },
+        "OPERATOR": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "operator"
+            }
+          ]
+        },
+        "MAIN_DESCRIBE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "main_describe"
+            }
+          ]
+        },
+        "NOW_ILL_RECORD": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "now_ill_record"
+            }
+          ]
+        },
+        "PAST_ILL_RECORD": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "past_ill_record"
+            }
+          ]
+        },
+        "EPIDEMIC_REPORT_DATE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "epidemic_report_date"
+            }
+          ]
+        },
+        "EPIDEMIC_REPORT_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "epidemic_report_code"
+            }
+          ]
+        },
+        "EPIDEMIC_REPORT_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "epidemic_report_name"
+            }
+          ]
+        },
+        "AVOIRDUPOIS": {
+          "target_mappings": [
+            {
+              "target_table": "omr",
+              "target_field": "value",
+              "special_handling": "result_name = 'Weight'"
+            }
+          ]
+        },
+        "ILLNESS_HAPPEN_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "illness_happen_time"
+            }
+          ]
+        },
+        "EDIT_TIME": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "edit_time"
+            }
+          ]
+        },
+        "SENSITIVE_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "sensitive_code"
+            }
+          ]
+        },
+        "SENSITIVE_NAME": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "allergies"
+            }
+          ]
+        },
+        "PATHOLOGY": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "pathology"
+            }
+          ]
+        },
+        "FIRST_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "first_flag"
+            }
+          ]
+        },
+        "DISEASE_DATE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "disease_date"
+            }
+          ]
+        },
+        "FEVER_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "ferver_code"
+            }
+          ]
+        },
+        "DIARRHEA_CODE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "diarrhea_code"
+            }
+          ]
+        },
+        "VCT_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "vct_flag"
+            }
+          ]
+        },
+        "FEVER_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "fever_flag"
+            }
+          ]
+        },
+        "RECEIPT_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "receipt_flag"
+            }
+          ]
+        },
+        "SICK_TRACE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "sick_trace"
+            }
+          ]
+        },
+        "REPORT_SEQ": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "report_seq"
+            }
+          ]
+        },
+        "SYSTOLIC": {
+          "target_mappings": [
+            {
+              "target_table": "chartevents",
+              "target_field": "value",
+              "special_handling": "itemid = 225309"
+            }
+          ]
+        },
+        "DIASTOLIC": {
+          "target_mappings": [
+            {
+              "target_table": "chartevents",
+              "target_field": "value",
+              "special_handling": "itemid = 225310"
+            }
+          ]
+        },
+        "PULSE": {
+          "target_mappings": [
+            {
+              "target_table": "chartevents",
+              "target_field": "value",
+              "special_handling": "itemid = 11111"
+            }
+          ]
+        },
+        "HEART_RATE": {
+          "target_mappings": [
+            {
+              "target_table": "chartevents",
+              "target_field": "value",
+              "special_handling": "itemid = 220045"
+            }
+          ]
+        },
+        "HEART_RHYTHM": {
+          "target_mappings": [
+            {
+              "target_table": "chartevents",
+              "target_field": "value",
+              "special_handling": "itemid = 220048"
+            }
+          ]
+        },
+        "GLU": {
+          "target_mappings": [
+            {
+              "target_table": "chartevents",
+              "target_field": "value",
+              "special_handling": "itemid = 50931"
+            }
+          ]
+        },
+        "LIVER_DISEASE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "liver_disease"
+            }
+          ]
+        },
+        "IF_BORN": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "if_born"
+            }
+          ]
+        },
+        "IF_BREAST_FEED": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "if_breast_feed"
+            }
+          ]
+        },
+        "IF_DIALYSIS": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "if_dialysis"
+            }
+          ]
+        },
+        "IF_IMPLANT": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "if_implant"
+            }
+          ]
+        },
+        "NEPHROPATHY": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "nephropathy"
+            }
+          ]
+        },
+        "HEIGHT": {
+          "target_mappings": [
+            {
+              "target_table": "omr",
+              "target_field": "result_value",
+              "special_handling": "result_name = 'Height'"
+            }
+          ]
+        },
+        "EVALUATION_MEMO": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "evaluation_memo"
+            }
+          ]
+        },
+        "INSTEAD_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "instead_flag"
+            }
+          ]
+        },
+        "SFZJ_FLAG": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "sfzj_flag"
+            }
+          ]
+        },
+        "SENSITIVE_RECORD": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "sensitive_record"
+            }
+          ]
+        },
+        "PRODUCE_DATE": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "produce_date"
+            }
+          ]
+        },
+        "PRODUCTION_CATEGORY": {
+          "target_mappings": [
+            {
+              "target_table": "doctor_note",
+              "target_field": "production_category"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "special_processing": [
+    {
+      "description": "入院时间提取年份",
+      "logic": "从ADMISSION_TIME提取年份作为patients表的anchor_year字段"
+    },
+    {
+      "description": "就诊类型映射",
+      "logic": "将VISIT_TYPE字段值映射：1=门诊，2=住院，存储到admission_type字段"
+    },
+    {
+      "description": "文件名基于的映射规则",
+      "logic": "根据文件名模式匹配相应的源表配置"
+    },
+    {
+      "description": "妇科出院有多个诊断记录",
+      "logic": "处理IN_DIAG_CODE、MAIN_DIAGNOSIS、SECOND_DIAGNOSIS、THIRD_DIAGNOSIS等多个诊断字段，分别创建diagnoses_EC表的记录"
+    },
+    {
+      "description": "病案首页和检验信息表的诊断记录需要补全seq_num",
+      "logic": "默认补为0"
+    },
+    {
+      "description": "chartevents表特殊处理",
+      "logic": "对于SYSTOLIC、DIASTOLIC、PULSE、HEART_RATE、HEART_RHYTHM、GLU等字段，需要为每个字段创建单独的chartevents记录，并设置对应的itemid值。同时需要将SICK_ID、RESIDENCE_NO、OPERATION_DATE等字段填充到每条新增记录中"
+    }
+  ]
+}
